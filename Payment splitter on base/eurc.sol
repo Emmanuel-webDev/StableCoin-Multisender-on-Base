@@ -7,7 +7,7 @@ contract Payer {
     using SafeERC20 for IERC20;
     IERC20 public token = IERC20(0x60a3E35Cc302bFA44Cb288Bc5a4F316Fdb1adb42); //Base EURC
 
-    uint public minDeposit = 5 * 10 ** 6; // min deposit 5$, Set for 6 decimals (USDC standard)
+    uint public minDeposit = 5 * 10 ** 6; // min deposit 5$, Set for 6 decimals (EURC standard)
 
     mapping(address => uint) public userBalance;
 
