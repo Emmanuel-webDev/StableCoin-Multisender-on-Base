@@ -5,16 +5,16 @@ import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 
 contract Payer {
     using SafeERC20 for IERC20;
-    IERC20 public token = IERC20(0x036CbD53842c5426634e7929541eC2318f3dCF7e); //Base sepolia USDC
+    IERC20 public token = IERC20(0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913); //Base USDC
 
-    uint public minDeposit = 0.2 * 10 ** 6; // min deposit 5$, Set for 6 decimals (USDC standard)
+    uint public minDeposit = 5 * 10 ** 6; // min deposit 5$, Set for 6 decimals (USDC standard)
 
     mapping(address => uint) public userBalance;
 
     //events
     event Deposit(address, uint);
     event Withdraw(address, uint);
-    event Transfer(uint, string);
+    event FundsSplit(address, uint, uint);
 
     //Deposit to contract
     function deposit(uint _amount) public {
@@ -73,7 +73,7 @@ contract Payer {
             }
         }
         userBalance[msg.sender] -= amountToSplit;
-        emit Transfer(amountToSplit, "Transaction done");
+        emit FundsSplit(msg.sender, amountToSplit, recipents.length);
         amountToSplit = 0;
     }
 }
